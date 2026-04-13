@@ -14,7 +14,7 @@ function Firmware() {
   const [editId, setEditId] = useState(null);
 
   const fetchData = async () => {
-    const res = await axios.get("http://localhost:5000/api/firmware");
+    const res = await axios.get("https://gsm-backend-xj0i.onrender.com");
     setData(res.data);
   };
 
@@ -28,10 +28,10 @@ function Firmware() {
 
   const handleSubmit = async () => {
     if (editId) {
-      await axios.put(`http://localhost:5000/api/firmware/${editId}`, form);
+      await axios.put(`https://gsm-backend-xj0i.onrender.com/${editId}`, form);
       setEditId(null);
     } else {
-      await axios.post("http://localhost:5000/api/firmware", form);
+      await axios.post("https://gsm-backend-xj0i.onrender.com", form);
     }
 
     setForm({ title: "", brand: "", description: "", fileUrl: "" });
@@ -39,7 +39,7 @@ function Firmware() {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/firmware/${id}`);
+    await axios.delete(`https://gsm-backend-xj0i.onrender.com/${id}`);
     fetchData();
   };
 
