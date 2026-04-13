@@ -13,10 +13,15 @@ function Firmware() {
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  const fetchData = async () => {
-    const res = await axios.get("https://gsm-backend-xj0i.onrender.com");
+const fetchData = async () => {
+  try {
+    const res = await axios.get("https://gsm-backend-xj0i.onrender.com/api/firmware");
     setData(res.data);
-  };
+  } catch (err) {
+    console.error("API Error:", err);
+    setData([]); // prevent crash
+  }
+};
 
   useEffect(() => {
     fetchData();
