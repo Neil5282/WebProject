@@ -33,10 +33,10 @@ const fetchData = async () => {
 
   const handleSubmit = async () => {
     if (editId) {
-      await axios.put(`https://gsm-backend-xj0i.onrender.com/${editId}`, form);
+      await axios.put(`https://gsm-backend-xj0i.onrender.com/api/firmware/${editId}`, form)
       setEditId(null);
     } else {
-      await axios.post("https://gsm-backend-xj0i.onrender.com", form);
+      await axios.post("https://gsm-backend-xj0i.onrender.com/api/firmware", form)
     }
 
     setForm({ title: "", brand: "", description: "", fileUrl: "" });
@@ -44,7 +44,7 @@ const fetchData = async () => {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`https://gsm-backend-xj0i.onrender.com/${id}`);
+    await axios.delete(`https://gsm-backend-xj0i.onrender.com/api/firmware/${id}`)
     fetchData();
   };
 
