@@ -2,22 +2,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import Firmware from "./Firmware";
-
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const isLoggedIn = localStorage.getItem("token"); // ✅ check login
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* 🔐 Protected Route */}
-        <Route
-          path="/firmware"
-          element={isLoggedIn ? <Firmware /> : <Login />}
-        />
+<Route
+  path="/firmware"
+  element={
+    <ProtectedRoute>
+      <Firmware />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );

@@ -53,26 +53,57 @@ function Firmware() {
       <h2 className="text-3xl font-bold mb-6 text-center">Firmware Manager</h2>
 
       {/* FORM */}
-      <div className="bg-white p-6 rounded shadow-md max-w-md mx-auto">
-        <input name="title" value={form.title} placeholder="Title" onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded" />
+    <div className="flex justify-center mb-10">
+  <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full max-w-lg border border-gray-200">
 
-        <input name="brand" value={form.brand} placeholder="Brand" onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded" />
+    <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
+      Add New Firmware
+    </h2>
 
-        <input name="description" value={form.description} placeholder="Description" onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded" />
+    <input
+      name="title"
+      value={form.title}
+      placeholder="📱 Device Title (e.g. OnePlus 13)"
+      onChange={handleChange}
+      className="w-full mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+    />
 
-        <input name="fileUrl" value={form.fileUrl} placeholder="Download Link" onChange={handleChange}
-          className="w-full border p-2 mb-3 rounded" />
+    <input
+      name="brand"
+      value={form.brand}
+      placeholder="🏷 Brand (e.g. OnePlus)"
+      onChange={handleChange}
+      className="w-full mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+    />
 
-        <button onClick={handleSubmit}
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-          {editId ? "Update Firmware" : "Add Firmware"}
-        </button>
-      </div>
+    <input
+      name="description"
+      value={form.description}
+      placeholder="📝 Description"
+      onChange={handleChange}
+      className="w-full mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+    />
+
+    <input
+      name="fileUrl"
+      value={form.fileUrl}
+      placeholder="🔗 Download Link"
+      onChange={handleChange}
+      className="w-full mb-6 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+    />
+
+    <button
+      onClick={handleSubmit}
+      className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold hover:scale-105 transition transform shadow-md"
+    >
+      {editId ? "Update Firmware 🚀" : "Add Firmware "}
+    </button>
+
+  </div>
+</div>
 
       {/* LIST */}
+    
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         {data.map((item) => (
           <div key={item._id} className="bg-white p-4 rounded shadow">
@@ -80,8 +111,14 @@ function Firmware() {
             <p className="text-gray-600">{item.brand}</p>
             <p>{item.description}</p>
 
-            <a href={item.fileUrl} target="_blank"
-              className="text-blue-500 underline">Download</a>
+            <a
+  href={item.fileUrl}
+  target="_blank"
+  rel="noreferrer"
+  className="text-blue-500 underline"
+>
+  Download
+</a>
 
             <div className="mt-3 flex gap-2">
               <button onClick={() => handleEdit(item)}
