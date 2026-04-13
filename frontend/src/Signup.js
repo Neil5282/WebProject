@@ -17,7 +17,7 @@ function Signup() {
 
   const handleSignup = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", form);
+      await axios.post("https://gsm-backend-xj0i.onrender.com/api/auth/signup", form);
       alert("Signup successful");
       navigate("/");
     } catch (err) {

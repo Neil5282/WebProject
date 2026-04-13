@@ -18,7 +18,7 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      const res = await axios.post("https://gsm-backend-xj0i.onrender.com/api/auth/login", form);
       localStorage.setItem("token", res.data.token);
       navigate("/firmware");
     } catch (err) {
