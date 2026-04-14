@@ -12,6 +12,7 @@ function Firmware() {
 
   const [data, setData] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [search, setSearch] = useState("");
 
 const fetchData = async () => {
   try {
@@ -107,10 +108,26 @@ const fetchData = async () => {
   </div>
 </div>
 
+<input
+  type="text"
+  placeholder="🔍 Search by model or brand..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  className="w-full max-w-md mx-auto block mb-6 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+/>
+
+
+
+
       {/* LIST */}
     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-        {data.map((item) => (
+        {data
+  .filter((item) =>
+    item.title.toLowerCase().includes(search.toLowerCase()) ||
+    item.brand.toLowerCase().includes(search.toLowerCase())
+  )
+  .map((item) => (
           <div key={item._id} className="bg-white p-4 rounded shadow">
             <h3 className="text-xl font-bold">{item.title}</h3>
             <p className="text-gray-600">{item.brand}</p>
