@@ -14,6 +14,7 @@ function Firmware() {
   const [editId, setEditId] = useState(null);
   const [search, setSearch] = useState("");
 
+  
 const fetchData = async () => {
   try {
     const res = await axios.get("https://gsm-backend-xj0i.onrender.com/api/firmware");
@@ -76,7 +77,9 @@ const handleDelete = async (id) => {
   };
 
   return (
-  <div className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-blue-100 p-6">
+    
+    
+  <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue to-blue-100 p-6">
       <h2 className="text-3xl font-bold mb-6 text-center">Firmware Manager</h2>
 
       {/* FORM */}
@@ -176,5 +179,6 @@ const handleDelete = async (id) => {
     </div>
   );
 }
+
 
 export default Firmware;
