@@ -32,23 +32,44 @@ const fetchData = async () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
+ const handleSubmit = async () => {
+  try {
     if (editId) {
-      await axios.put(`https://gsm-backend-xj0i.onrender.com/api/firmware/${editId}`, form)
-      setEditId(null);
+      await axios.put(`https://gsm-backend-xj0i.onrender.com/api/firmware/${editId}`, form);
+      alert("✅ Firmware updated successfully");
     } else {
-      await axios.post("https://gsm-backend-xj0i.onrender.com/api/firmware", form)
+      await axios.post("https://gsm-backend-xj0i.onrender.com/api/firmware", form);
+      alert("✅ Firmware added successfully");
     }
 
-    setForm({ title: "", brand: "", description: "", fileUrl: "" });
-    fetchData();
-  };
+    setForm({
+      title: "",
+      brand: "",
+      description: "",
+      fileUrl: ""
+    });
 
-  const handleDelete = async (id) => {
-    await axios.delete(`https://gsm-backend-xj0i.onrender.com/api/firmware/${id}`)
+    setEditId(null);
     fetchData();
-  };
 
+  } catch (err) {
+    console.error(err);
+    alert("❌ Something went wrong");
+  }
+};
+
+const handleDelete = async (id) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this firmware?");
+
+  if (!confirmDelete) return;
+
+  try {
+    await axios.delete(`https://gsm-backend-xj0i.onrender.com/api/firmware/${id}`);
+    fetchData();
+  } catch (err) {
+    console.error("Delete error:", err);
+  }
+};
   const handleEdit = (item) => {
     setForm(item);
     setEditId(item._id);
