@@ -76,6 +76,15 @@ const handleDelete = async (id) => {
     setEditId(item._id);
   };
 
+const handleDownload = async (id) => {
+  try {
+    await axios.put(`https://gsm-backend-xj0i.onrender.com/api/firmware/download/${id}`);
+    fetchData(); // refresh count
+  } catch (err) {
+    console.error("Download count error:", err);
+  }
+};
+
   return (
     
     
@@ -101,9 +110,10 @@ const handleDelete = async (id) => {
     <input
       name="brand"
       value={form.brand}
-      placeholder="🏷 Brand (e.g. OnePlus)"
+      placeholder="🏷 OTA-Version (e.g. PJZ110_XX.zip)"
       onChange={handleChange}
       className="w-full mb-4 p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-400 outline-none"
+      
     />
 
     <input
@@ -153,15 +163,23 @@ const handleDelete = async (id) => {
   )
   .map((item) => (
           <div key={item._id} className="bg-white p-4 rounded shadow">
+            <p className="text-xs text-gray-400 mt-1">
+  📅 {new Date(item.createdAt).toLocaleString()}
+</p>
             <h3 className="text-xl font-bold">{item.title}</h3>
-            <p className="text-gray-600">{item.brand}</p>
-            <p>{item.description}</p>
+            <p className="text-green-600">{item.brand}</p>
+            <p className="text-gray-600">{item.description}</p>
 
-            <a
+            <span className="text-green-400 text-sm">
+  📥 {item.downloads || 0} downloads
+</span>
+
+<a
   href={item.fileUrl}
   target="_blank"
   rel="noreferrer"
-  className="text-blue-500 underline"
+  onClick={() => handleDownload(item._id)}
+  className="text-blue-400 hover:underline"
 >
   Download
 </a>
