@@ -85,11 +85,38 @@ const handleDownload = async (id) => {
   }
 };
 
+const handleLogout = () => {
+  localStorage.removeItem("token"); // remove login token
+  window.location.href = "/"; // go to login page
+};
+
+
   return (
-    
+
     
   <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue to-blue-100 p-6">
       <h2 className="text-3xl font-bold mb-6 text-center">Firmware Manager</h2>
+
+
+{/* LOGOUT BUTTON */}
+<div className="flex justify-between items-center mb-6">
+  <h1 className="text-2xl font-bold text-white">
+  
+  </h1>
+
+  <button
+    onClick={handleLogout}
+    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+  >
+    Logout
+  </button>
+</div>
+
+
+
+
+
+      
 
       {/* FORM */}
     <div className="flex justify-center mb-10">
@@ -98,6 +125,8 @@ const handleDownload = async (id) => {
     <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">
       Add New Firmware
     </h2>
+
+    
 
     <input
       name="title"
@@ -154,6 +183,8 @@ const handleDownload = async (id) => {
 
 
       {/* LIST */}
+
+      
     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         {data
@@ -172,16 +203,18 @@ const handleDownload = async (id) => {
 
             <span className="text-green-400 text-sm">
   📥 {item.downloads || 0} downloads
+  
 </span>
+
+
 
 <a
   href={item.fileUrl}
   target="_blank"
   rel="noreferrer"
   onClick={() => handleDownload(item._id)}
-  className="text-blue-400 hover:underline"
->
-  Download
+  className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 text-sm rounded-md ml-3"
+>  ⬇️ Download
 </a>
 
             <div className="mt-3 flex gap-2">
